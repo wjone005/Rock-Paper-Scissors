@@ -11,7 +11,7 @@
 
         function humanPlay(){
             const answer = prompt("Make a selection between Rock, Paper, Scissors", );
-            return answer;
+            return answer.charAt(0).toUpperCase() + answer.slice(1);
         }
 
         const playerSelection = humanPlay();
@@ -29,17 +29,17 @@
             let Scissors = "Scissors";
            
             
-            if (playerSelection === Rock && computerPlay === "Scissors"){
+            if (playerSelection == Rock && computerPlay == "Scissors"){
                 return rockWin;
-            } else if (playerSelection === Paper && computerPlay === "Rock"){
+            } else if (playerSelection == Paper && computerPlay == "Rock"){
                 return paperWin;
-            }else if (playerSelection === Scissors && computerPlay === "Paper"){
+            }else if (playerSelection == Scissors && computerPlay == "Paper"){
                 return scissorsWin;
-            } else if(playerSelection === computerSelection){
+            } else if(playerSelection == computerSelection){
                 return draw;
-            } else if(computerPlay === "Rock" && playerSelection === Scissors) {
+            } else if(computerPlay == "Rock" && playerSelection == Scissors) {
                 return loser;
-            } else if(computerPlay === "Scissors" && playerSelection === Paper) {
+            } else if(computerPlay == "Scissors" && playerSelection == Paper) {
                 return loser;
             } else {
                 return loser;
