@@ -4,6 +4,7 @@
         //Computer Randomly Picks Rock, Paper or Scissors
         function computerPlay(choice){
             return choice[Math.floor(Math.random()*choice.length)];
+            
         }
         const choice = ["Rock", "Paper", "Scissors"];
         
@@ -12,15 +13,38 @@
             const answer = prompt("Make a selection between Rock, Paper, Scissors", );
             return answer;
         }
-        
 
-        function playRound(playerSelection, computerSelection){
-            
-
-        }
         const playerSelection = humanPlay();
         const computerSelection = computerPlay(choice);
-        console.log(playerSelection, computerSelection);
+
+         function playRound(playerSelection, computerSelection){
+            
+            let rockWin = "You Win! Rock beats Scissors";
+            let paperWin = "You Win! Paper beats Rock";
+            let scissorsWin = "You Win! Scissors beats Paper";
+            let draw = "It's a Draw! " + "computer selected " + computerSelection + ' and you selected ' + playerSelection;
+            let loser = "You lose! " + playerSelection + " can\'t beat " + computerSelection;
+            let Rock = "Rock";
+            let Paper = "Paper";
+            let Scissors = "Scissors";
+           
+            
+            if (playerSelection === Rock && computerPlay === "Scissors"){
+                return rockWin;
+            } else if (playerSelection === Paper && computerPlay === "Rock"){
+                return paperWin;
+            }else if (playerSelection === Scissors && computerPlay === "Paper"){
+                return scissorsWin;
+            } else if(playerSelection === computerSelection){
+                return draw;
+            } else{
+                return loser;
+            } 
+
+        } 
+        
+        console.log(playRound(playerSelection, computerSelection));
+        // console.log(playerSelection, computerSelection);
 
         
     </script>
