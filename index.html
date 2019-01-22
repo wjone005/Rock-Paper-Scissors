@@ -37,7 +37,11 @@
                 return scissorsWin;
             } else if(playerSelection === computerSelection){
                 return draw;
-            } else{
+            } else if(computerPlay === "Rock" && playerSelection === Scissors) {
+                return loser;
+            } else if(computerPlay === "Scissors" && playerSelection === Paper) {
+                return loser;
+            } else {
                 return loser;
             } 
 
