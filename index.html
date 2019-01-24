@@ -1,54 +1,156 @@
 <!DOCTYPE html>
 <html>
     <script>
-        //Computer Randomly Picks Rock, Paper or Scissors
-        function computerPlay(choice){
-            return choice[Math.floor(Math.random()*choice.length)];
+        
+        const Rock = "ROCK";
+        const Paper = "PAPER";
+        const Scissors = "SCISSORS";
+        const choice = [Rock, Paper, Scissors];
+
+        const Player = "Player";
+        const Computer = "Computer";
+        let playerPoints = 0;
+        let computerPoints = 0;
+        let tiePoints = 0;
+        
+
+        game()
+
+        function game()
+        {
+            
+
+            for (let i = 0; i < 5; i++)
+            {
+            
+                
+                const playerSelection = humanPlay();
+                let computerSelection = computerPlay(choice)
+                playRound(playerSelection, computerSelection)
+                console.log(playRound(playerSelection, computerSelection));
+                totalPoints()
+
+
+
+            }
+            if (playerPoints > computerPoints){
+                gameWinner()
+            } else if (computerPoints > playerPoints){
+                gameLoser()
+            } else if (playerPoints == computerPoints){
+                gameDraw()
+            } else{
+                console.log("Something went wrong");
+            }
+
+            
             
         }
-        const choice = ["Rock", "Paper", "Scissors"];
+
+       
+        
+
+        function computerPlay(){
+            return choice[Math.floor(Math.random()*choice.length)];
+        }
+        
         
 
         function humanPlay(){
-            const answer = prompt("Make a selection between Rock, Paper, Scissors", );
-            return answer.charAt(0).toUpperCase() + answer.slice(1);
+            let inputValid = false;
+            let answer = prompt("Make a selection between Rock, Paper, Scissors", "" );
+             if (answer){
+                answer = answer.toUpperCase()
+                inputValid = isInputValid(answer);
+                
+                
+            } 
+            if(!inputValid) {
+                alert("Not a valid selection. Choose 'Rock', 'Paper' or 'Scissors'");
+                }
+
+            while(!inputValid){
+            return humanPlay();
+            }
+             return answer; 
         }
 
-        const playerSelection = humanPlay();
-        const computerSelection = computerPlay(choice);
+        
 
-         function playRound(playerSelection, computerSelection){
-            
-            let rockWin = "You Win! Rock beats Scissors";
-            let paperWin = "You Win! Paper beats Rock";
-            let scissorsWin = "You Win! Scissors beats Paper";
+        function playRound(playerSelection, computerSelection){
+            let rockWin = "You Win! ROCK beats SCISSORS.";
+            let paperWin = "You Win! PAPER beats ROCK ";
+            let scissorsWin = "You Win! SCISSORS beats PAPER ";
             let draw = "It's a Draw! " + "computer selected " + computerSelection + ' and you selected ' + playerSelection;
             let loser = "You lose! " + playerSelection + " can\'t beat " + computerSelection;
-            let Rock = "Rock";
-            let Paper = "Paper";
-            let Scissors = "Scissors";
+            
+            
            
             
-            if (playerSelection == Rock && computerPlay == "Scissors"){
-                return rockWin;
-            } else if (playerSelection == Paper && computerPlay == "Rock"){
-                return paperWin;
-            }else if (playerSelection == Scissors && computerPlay == "Paper"){
-                return scissorsWin;
-            } else if(playerSelection == computerSelection){
-                return draw;
-            } else if(computerPlay == "Rock" && playerSelection == Scissors) {
-                return loser;
-            } else if(computerPlay == "Scissors" && playerSelection == Paper) {
-                return loser;
+            if (playerSelection === Rock && computerSelection === Scissors){
+                console.log(rockWin)
+                return addPlayerPoint();
+            } else if (playerSelection === Paper && computerSelection === Rock){
+                console.log(paperWin)
+                return addPlayerPoint();
+            }else if (playerSelection === Scissors && computerSelection === Paper){
+                console.log(scissorsWin)
+                return addPlayerPoint();
+            } else if(playerSelection === computerSelection){
+                console.log(draw)
+                return addDrawPoint(); 
+            } else if(computerSelection === Rock && playerSelection === Scissors) {
+                console.log(loser)
+                return addComputerPoint();
+            } else if(computerSelection === Scissors && playerSelection === Paper) {
+                console.log(loser)
+                return addComputerPoint();
+            } else if(computerSelection === Paper && playerSelection === Rock) {
+                console.log(loser)
+                return addComputerPoint();
             } else {
-                return loser;
+                console.log(playerSelection, + '' + computerSelection);
             } 
+            
 
         } 
+        // Testing Purposes Only!
+        function totalPoints(){
+            console.log(playerPoints, " ", computerPoints, " ", tiePoints);
+        }
+    
+        function gameWinner(){
+        console.log("Congrats You Win! Type game() into the console and press enter to play again " + "Player Score " + playerPoints + " Computer Score " + computerPoints + " Draw Score " + tiePoints);
+        }
+
+        function gameLoser(){
+        console.log("Congrats You Lost! Type game() into the console and press enter to play again " + "Player Score " + playerPoints + " Computer Score " + computerPoints + " Draw Score " + tiePoints);
+        }
+
+        function gameDraw(){
+            console.log("Congrats Nobody Won, Its A Draw " + "Player Score " + playerPoints + " Computer Score " + computerPoints + " Draw Score " + tiePoints);
+        }
         
-        console.log(playRound(playerSelection, computerSelection));
+        function addPlayerPoint(){
+            ++playerPoints
+        }
+
+        function addComputerPoint(){
+            ++computerPoints
+        }
+
+        function addDrawPoint(){
+            ++tiePoints
+        }
+
+        function isInputValid(answer){
+        return answer == Rock || answer == Paper || answer == Scissors;
+        }
+        
+        //Testing Purposes
+        //console.log(playRound(playerSelection, computerSelection));
         // console.log(playerSelection, computerSelection);
+    
 
         
     </script>
