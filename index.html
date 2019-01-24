@@ -1,37 +1,47 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <title>Rock Paper Scissors Game</title>
+    </head>
+    <body>
+        <h1>Open Console to See Results</h1>
+        <ul>
+            <li><b>Safari Users</b> - From the keyboard: press Option-Cmd-C</li>
+            <li><b>Firefox Users</b> - From the keyboard: press Ctrl+Shift+J (or Cmd+Shift+J on macOS)</li>
+            <li><b>Chrome Users</b> - From the keyboard: press Ctrl+Shift+J (or Cmd+Shift+J on macOS)</li>
+            <li><b>Edge Users</b> - From the keyboard: press Ctrl+Shift+J (or Cmd+Shift+J on macOS)</li>
+        </ul>
+    </body>
     <script>
         
         const Rock = "ROCK";
         const Paper = "PAPER";
         const Scissors = "SCISSORS";
         const choice = [Rock, Paper, Scissors];
-
         const Player = "Player";
         const Computer = "Computer";
         
         
-
+        // Execute the game
         game()
-
+        
+        // Game consist all functions to ensure gameplay
         function game()
         {
             let playerPoints = 0;
             let computerPoints = 0;
             let tiePoints = 0;
 
+            // Execute game 5 times
             for (let i = 0; i < 5; i++)
-            {
-            
-                
+            {  
                 const playerSelection = humanPlay();
                 let computerSelection = computerPlay(choice)
                 playRound(playerSelection, computerSelection)
                 totalPoints()
-
-
-
             }
+
+            // Inform user who won, lost or if it's a draw
             if (playerPoints > computerPoints){
                 gameWinner()
             } else if (computerPoints > playerPoints){
@@ -41,52 +51,45 @@
             } else{
                 console.log("Something went wrong");
             }
-
-            
-            
         
-
-       
-        
-
+        // Randomize the computers input of choice
         function computerPlay(){
             return choice[Math.floor(Math.random()*choice.length)];
         }
         
-        
-
+         // Prompt user for input
         function humanPlay(){
             let inputValid = false;
             let answer = prompt("Make a selection between Rock, Paper, Scissors", "" );
              if (answer){
+                 // Force input to Uppercase to prevent user error
                 answer = answer.toUpperCase()
+                // Place answer in function if the user input is incorrect
                 inputValid = isInputValid(answer);
-                
-                
-            } 
+                } 
+
+            // If inputValid is true (as it's currently false), prompt user input is invalid
             if(!inputValid) {
                 alert("Not a valid selection. Choose 'Rock', 'Paper' or 'Scissors'");
                 }
-
+            // While the inputValid is true display prompt for user input
             while(!inputValid){
             return humanPlay();
             }
+            // Return will equal user's input
              return answer; 
         }
 
-        
-
+        // Compare the player's answer vs computer's and display who won
         function playRound(playerSelection, computerSelection){
             let rockWin = "You Win! ROCK beats SCISSORS.";
             let paperWin = "You Win! PAPER beats ROCK ";
             let scissorsWin = "You Win! SCISSORS beats PAPER ";
             let draw = "It's a Draw! " + "computer selected " + computerSelection + ' and you selected ' + playerSelection;
             let loser = "You lose! " + playerSelection + " can\'t beat " + computerSelection;
-            
-            
-           
-            
-            if (playerSelection === Rock && computerSelection === Scissors){
+
+            // Compare Human and Computer answers, output winner and add a point            
+             if (playerSelection === Rock && computerSelection === Scissors){
                 console.log(rockWin)
                 return addPlayerPoint();
             } else if (playerSelection === Paper && computerSelection === Rock){
@@ -110,45 +113,42 @@
             } else {
                 console.log(playerSelection, + '' + computerSelection);
             } 
-            
-
         } 
-        // Testing Purposes Only!
+
+        // Display Total points among everyone
         function totalPoints(){
             console.log("PLAYER 1 ", playerPoints, '|' , "COMPUTER ", computerPoints, '|', "DRAW ", tiePoints);
         }
-    
+        // Display only if you won, with total points
         function gameWinner(){
         console.log("Congrats You Win! Type game() into the console and press enter to play again " + "Player Score " + playerPoints + " Computer Score " + computerPoints + " Draw Score " + tiePoints);
         }
-
+        // Display if you lost, with total points
         function gameLoser(){
         console.log("Congrats You Lost! Type game() into the console and press enter to play again " + "Player Score " + playerPoints + " Computer Score " + computerPoints + " Draw Score " + tiePoints);
         }
-
+        // Display if there's a Draw, with total points
         function gameDraw(){
             console.log("Congrats Nobody Won, Its A Draw " + "Player Score " + playerPoints + " Computer Score " + computerPoints + " Draw Score " + tiePoints);
         }
-        
+        // Add 1 point for human player
         function addPlayerPoint(){
             ++playerPoints
         }
-
+        // Add 1 point for computer player
         function addComputerPoint(){
             ++computerPoints
         }
-
+        // Add 1 point for Draw
         function addDrawPoint(){
             ++tiePoints
         }
-
+        // Compare user input and ensure it matches the variables 
         function isInputValid(answer){
         return answer == Rock || answer == Paper || answer == Scissors;
         }
         }
-        //Testing Purposes
-        //console.log(playRound(playerSelection, computerSelection));
-        // console.log(playerSelection, computerSelection);
+        
     
 
         
